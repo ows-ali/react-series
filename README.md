@@ -1,70 +1,90 @@
-# Getting Started with Create React App
+# React for beginners
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What is React
 
-## Available Scripts
+Frontend library
+The hottest right now, most likely topmost among Angular, Vue etc
 
-In the project directory, you can run:
+## Why learn React
 
-### `npm start`
+A lot of jobs out there
+Widely used, and appreciated, and support is available
+Web3 frontend is mostly React (and yes NextJS as well)
+Even, if you dont go for web3, it is itself enough to get a job as a frontend developer
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- HTML
+- CSS
+- JS-Basic and advanced JS like ES6+ including arrow functions, map/reduce/filter, promises, async await, .then/.catch, rest/spread, etc
 
-### `npm test`
+## Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You need to install NodeJS, which will be used to run the React application
 
-### `npm run build`
+## Creating first React app
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Run `npx create-react-app firstreactapp`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+cd into the directory
+and run `npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Understanding file structure and features like hot reloading
 
-### `npm run eject`
+package.json
+package-lock.json
+.git
+.gitignore
+node_modules
+public
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Understanding index.html, our application mounts at root
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Git is auto setup.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Few files and folders wont be pushed on Github
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Intro to component
 
-## Learn More
+- It is a function: rafc, rafce, rfc, rfce
+- Html vs JSX (because we have brackets {} to add JS)
+- Importing React is optional in React 18
+- Must return only one element
+- camelCase (classname , onClick nd everything else)
+- React.Fragment or <></>
+- Composite pattern: can use component within a component, nest components (will be covered in props children) etc
+- Reusability of components (will see power after learnign props)
+- Old way: Class vs Functional components (an application can contain both type of compoents at the same time)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## VS Code Extensions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Auto close tag
+- Auto rename tag
+- ES7, React snippets (rafc, rfc, rfc, rfce)
+- Prettier (make sure format on save is ticked and default formatter is set to Prettier)
 
-### Code Splitting
+## Chrome extension
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+React debugger
 
-### Analyzing the Bundle Size
+## Adding css, classes and styles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- importing css file
+- adding classNames
+- inline styling: adding styles in double brackets {{...}} or object in single bracket
+- everything is camelCase and stringified
 
-### Making a Progressive Web App
+## Props
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- props to component are same as input to functions
+- reusability advantage
+- Destructuring: direct, first line, right inside argument area
+- passing obj items as props at a time
 
-### Advanced Configuration
+## Children Prop
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+It is a special prop
 
-### Deployment
+## Passing functions as props
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Similarly, we can pass functions as props as well, (there is a hook named useCallback() that you may need to use, which is required to avoid unnecessary rerendering of child component to improve performance, but more on useCallback later/separate video)
