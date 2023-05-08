@@ -1,7 +1,12 @@
-import React from "react";
+import StateTest from "./StateTest";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      App
+      <StateTest />
+    </div>
+  );
 };
 
 export default App;
