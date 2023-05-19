@@ -1,70 +1,267 @@
-# Getting Started with Create React App
+# Learn React by building a Basic Movie CRUD App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Step 1: Setting up React application
 
-## Available Scripts
+Lets learn React basics by building a Movie application.
 
-In the project directory, you can run:
+Make sure you have installed [Nodejs](https://nodejs.org/en/download)
 
-### `npm start`
+Run `npx create-react-app movieapp`
+(where movieapp is the name of your application, you can name it whatever you want)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Now, once the installation is finished, run
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+cd movieapp
+npm start
+```
 
-### `npm test`
+### Cleanup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We will remove every file inside src, except index.js, and we will also put our predefined css in index.css to save time
 
-### `npm run build`
+```
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #d2dbdd;
+}
+.heading_style {
+  padding: 30px 0;
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #868686;
+  background-color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+.cards {
+  width: 100%;
+  height: auto;
+}
+.card {
+  margin: 6%;
+  /* transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1); */
+  background-color: #fff;
+  width: 21.25%;
+  border-radius: 12px;
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
+  float: left;
+}
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+.card:hover {
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05, 1.05);
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+.card_img {
+  width: 100%;
+  height: 235px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+.card_info {
+  background-color: #fff;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  padding: 16px 24px 24px 24px;
+  background-color: #fff;
+}
 
-### `npm run eject`
+.card_category {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  color: #868686;
+  background-color: #fff;
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+.card_title {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: "Raleway", sans-serif;
+  background-color: #fff;
+  text-transform: capitalize;
+}
+button {
+  padding: 5px 8px;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.addForm {
+  width: 600px;
+  margin: auto;
+  text-align: center;
+  background: white;
+}
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+input {
+  display: block;
+  width: 100%;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: white;
+  font-size: 24px;
+  /* border: none; */
+}
+.addBtn {
+  font-size: 20px;
+  padding: 10px;
+  color: #868686;
+  border-radius: 5px;
+}
+.main-heading {
+  text-align: center;
+  color: #868686;
+  background: white;
+  margin-top: 100px;
+  padding: 20px;
+  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Step 2: Creating movie list component
 
-## Learn More
+First, we add Movies.js in src directory, which will contain our whole movie app (basically the add movie form and the movie listing component)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+const [data, setData] = useState([
+    {
+      id: 1,
+      name: "DARK",
+      imgSrc: "https://wallpapercave.com/wp/wp4056410.jpg",
+      category: "Drama",
+      link: "https://www.netflix.com/in/title/80990668?souece=35",
+    },
+    ...
+])
+...
+<MovieListing data={data} />
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Then MovieListing.js looks like this:
 
-### Code Splitting
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+const MovieListing = ({ data }) => {
+  return (
+    <div>
+      {data.map((movie) => {
+        return <MovieCard movie={movie} />;
+      })}
+    </div>
+  );
+};
+```
 
-### Analyzing the Bundle Size
+And last, our MovieCard component will look like this:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
 
-### Making a Progressive Web App
+const MovieCard = ({ movie }) => {
+  console.log(movie);
+  return (
+    <div className="card" key={movie.id}>
+      <img src={movie.imgSrc} alt="img" className="card_img" />
+      <div className="card_info">
+        <span className="card_category">{movie.category}</span>
+        <h3 className="card_title">{movie.name}</h3>
+        <a href={movie.link} target="_blank" rel="noreferrer">
+          <button>Watch Now</button>
+        </a>
+      </div>
+    </div>
+  );
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+export default MovieCard;
 
-### Advanced Configuration
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Step 3: Adding new movie form
 
-### Deployment
+We will create addMovie function in Movies.js which will be passed as callback to AddMovie (because we want to update state of parent so we need to pass a function from parent to child which child can use)
+Here is our updated Movies.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+const addMovie = (movie) => {
+    setData([...data, movie]);
+  };
+...
+<AddMovie addMovie={addMovie} />
 
-### `npm run build` fails to minify
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+And the AddMovie.js looks like this
+
+```
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    addMovie({ name, imgSrc, category, link });
+  };
+
+  return (
+    <div className="addForm">
+      <form onSubmit={(e) => handleAdd(e)}>
+        <input
+          placeholder="enter image url"
+          value={imgSrc}
+          onChange={(e) => {
+            setImgSrc(e.target.value);
+          }}
+        />
+        <input
+          placeholder="enter movie name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        />
+        <input
+          placeholder="enter movie category"
+          value={category}
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+        />
+        <input
+          placeholder="enter movie url"
+          value={link}
+          onChange={(e) => {
+            setLink(e.target.value);
+          }}
+        />
+
+        <button type="submit" className="addBtn">
+          Add Movie
+        </button>
+      </form>
+    </div>
+```
+
+# Conclusion
+
+Here we learnt, how you can break your React application into multiple components. However, there is no strict rule for that, you will see different structure in different projects. It is just a matter of preference. But just make sure that the code is reusable and not too lengthy to be readable.
+
+We also saw how to pass data as props and function as props/callbacks.
+
+This gives you a good starting point to work with React applications.
